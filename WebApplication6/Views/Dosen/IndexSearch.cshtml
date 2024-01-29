@@ -1,0 +1,73 @@
+﻿@model System.Data.DataTable
+@{
+    ViewBag.Title = "IndexSearch";
+}
+
+<html>
+<body>
+
+    <table class="table table-bordered table-striped">
+        <tr>
+            <h1>Search Nama Dosen</h1>
+        </tr>
+        <tr>
+            <form id="myForm" action="@Url.Action("IndexSearch","Dosen")" method="get" onsubmit="submitForm(event)">
+                <input type="text" id="dosen" name="myText">
+                <input type="hidden" id="limit" name="limit" value="5">
+                <a href="javascript:void(0)" onclick="searchDosen()">Search Dosen</a>
+            </form>
+
+            <script>
+            function searchDosen() {
+                var inputValue = document.getElementById("dosen").value;
+                var limitValue = document.getElementById("limit").value;
+                window.location.href = "@Url.Action("IndexSearch","Dosen")" + "?limit=" + limitValue + "&id=" + inputValue;
+          }
+            </script>
+        </tr>
+        <tr>
+            <th>Nip</th>
+            <th>Nama Dosen</th>
+        </tr>
+        @for (int i = 0; i < Model.Rows.Count; i++)
+        {
+            <tr>
+                <td>@Model.Rows[i][0]</td>
+                <td>@Model.Rows[i][1]</td>
+            </tr>
+
+        }
+    </table>
+    <a href="javascript:void(0)" onclick="first()">1</a>
+    <a href="javascript:void(0)" onclick="second()">2</a>
+    <a href="javascript:void(0)" onclick="third()">3</a>
+    <a>Next</a>
+
+    <script>
+        let jml = 0;
+        function first() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const limit = urlParams.get('limit');
+        jml = limit * 1;
+                var inputValue = document.getElementById("dosen").value;
+                window.location.href = "@Url.Action("IndexSearch","Dosen")" + "?limit=" + jml + "&id=" + inputValue
+    }
+        function second() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const limit = urlParams.get('limit');
+        jml = limit + 5;
+                var inputValue = document.getElementById("dosen").value;
+                window.location.href = "@Url.Action("IndexSearch","Dosen")" + "?limit=" + jml + "&id=" + inputValue
+    }
+        function third() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const limit = urlParams.get('limit');
+        jml = limit + 5;
+                var inputValue = document.getElementById("dosen").value;
+                window.location.href = "@Url.Action("IndexSearch","Dosen")" + "?limit=" + jml + "&id=" + inputValue;
+
+          }
+    </script>
+
+</body>
+</html>
